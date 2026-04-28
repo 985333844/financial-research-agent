@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  finra-cli:
+    build: .
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    profiles:
+      - cli
+
+  finra-web:
+    build: .
+    env_file: .env
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+    command: ["python", "-m", "finra.web"]
+    profiles:
+      - web
